@@ -1,0 +1,17 @@
+
+blockMesh
+topoSet -dict system/topoSetDict.outer
+refineMesh
+topoSet -dict system/topoSetDict.inner
+refineMesh
+
+
+//after these steps copy the u alpha.water and p_rgh to latest time
+
+
+setFields 
+touch new.foam
+decomposePar
+mpirun -np 6 interFoam -parallel
+reconstructParMesh
+reconstructPar
